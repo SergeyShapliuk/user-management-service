@@ -156,6 +156,7 @@ npm run test:watch
 
 После запуска сервера документация доступна по адресу:
 ```
+https://user-management-service-production-887d.up.railway.app/api/swagger/
 http://localhost:5001/api/swagger
 ```
 
@@ -199,4 +200,5 @@ ACCESS_TOKEN_EXPIRES_IN=1h
 
 
 MIT
+
 
