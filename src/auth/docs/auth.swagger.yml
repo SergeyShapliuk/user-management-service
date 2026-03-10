@@ -1,0 +1,187 @@
+openapi: 3.0.0
+info:
+  title: API Documentation
+  version: 1.0.0
+
+tags:
+  - name: Auth
+    description: API for autenthicated
+
+paths:
+  /api/auth/registration:
+    post:
+      summary: Registration new user
+      tags: [ Auth ]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegistrationInput'
+      responses:
+        201:
+          description: The user was successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegistrationOutput'
+        400:
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationErrorListOutput'
+
+  /api/auth/login:
+    post:
+      summary: Login user
+      tags: [ Auth ]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginInput'
+      responses:
+        200:
+          description: The requested login
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginOutput'
+
+        400:
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationErrorListOutput'
+
+        404:
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationErrorListOutput'
+components:
+  schemas:
+    RegistrationOutput:
+      type: object
+      required:
+        - id
+        - fullName
+        - birthDate
+        - email
+        - role
+        - isActive
+        - createdAt
+      properties:
+        id:
+          type: string
+          example: 5f1a2b3c4d5e6f7g8h9i0j1k2
+        fullName:
+          type: string
+          example: 'Ivanov Ivan Ivanovich'
+        birthDate:
+          type: string
+          example: '1990-01-01'
+        email:
+          type: string
+          example: example@test.com
+        role:
+          type: string
+          enum: [ admin, user ]
+          example: user
+        isActive:
+          type: boolean
+          example: true
+        createdAt:
+          type: string
+          format: date-time
+          example: 2023-03-05T12:00:00Z
+    RegistrationInput:
+      type: object
+      required:
+        - fullName
+        - birthDate
+        - email
+        - password
+      properties:
+        fullName:
+          type: string
+          description: The full name of the user
+          example: Ivanov Ivan Ivanovich
+        birthDate:
+          type: string
+          description: The birthDate's user
+          example: 1990-01-01
+        email:
+          type: string
+          description: The user's email address
+          example: test@example.com
+        password:
+          type: string
+          description: Password
+          example: 123456
+    LoginInput:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+          description: The user's email address
+          example: test@example.com
+        password:
+          type: string
+          description: Password
+          example: 123456
+    LoginOutput:
+      type: object
+      required:
+        - accessToken
+      properties:
+        accessToken:
+          type: string
+          description: Token for autorization
+          example: fwekfjhkejwfh efwekjfhkjhk43jfhkj4hkj34hkj34hkj34h 34jkh34kjh34 rgjhejkr45hkhjhj. lksdfn lf 09df7 98dffd98df98vbdfby9df8b97df9b7fd9b79dfb7 dbdfblkdfhlbhdfjkbh
+    ValidationErrorOutput:
+      type: object
+      required:
+        - status
+        - detail
+        - source
+      properties:
+        status:
+          type: integer
+          format: int32
+          description: HTTP status code of the error
+          example: 400
+        detail:
+          type: string
+          description: Detailed error message
+          example: Email is not valid
+        source:
+          type: object
+          properties:
+            pointer:
+              type: string
+              description: JSON pointer to the field that caused the error
+              example: email
+        code:
+          type: string
+          nullable: true
+          description: Optional error code
+          example: null
+          default: null
+    ValidationErrorListOutput:
+      type: object
+      required:
+        - errors
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationErrorOutput'
+          description: List of validations errors

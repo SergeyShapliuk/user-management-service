@@ -1,0 +1,13 @@
+openapi: 3.0.0
+info:
+  title: Test APId
+  version: 1.0.0
+  description: Test API documentation
+
+tags:
+  - name: Testing
+    description: API for clearing the database
+  - name: Auth
+    description: API for autenthicated
+  - name: Users
+    description: API for managing users
