@@ -13,11 +13,7 @@ const swaggerOptions = {
         'For admin login - email: admin@mail.com, password: admin123',
     },
   },
-  apis: [
-    path.join(__dirname, "../../auth/docs/*.swagger.yml"),
-    path.join(__dirname, "../../users/docs/*.swagger.yml"),
-    path.join(__dirname, "../../testing/docs/*.swagger.yml"),
-  ],
+  apis: [path.join(process.cwd(), 'src/**/*.swagger.yml')],
 };
 
 const swaggerSpec = swaggerJsdoc(swaggerOptions);

@@ -28,6 +28,6 @@ export const setupApp = (app: Express) => {
     res.status(HttpStatus.Ok).send('Test Effective Mobile');
   });
 
-  
+
   return app;
 };
