@@ -1,6 +1,7 @@
 import swaggerJsdoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
 import { Express } from 'express';
+import path from 'path';
 
 const swaggerOptions = {
   definition: {
@@ -13,9 +14,9 @@ const swaggerOptions = {
     },
   },
   apis: [
-    './src/auth/docs/*.swagger.yml',
-    './src/users/docs/*.swagger.yml',
-    './src/testing/docs/*.swagger.yml',
+    path.resolve('src/auth/docs/*.swagger.yml'),
+    path.resolve('src/users/docs/*.swagger.yml'),
+    path.resolve('src/testing/docs/*.swagger.yml'),
   ],
 };
 
