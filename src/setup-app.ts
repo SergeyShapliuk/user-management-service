@@ -14,8 +14,6 @@ import { authRouter } from './auth/routers/auth.router';
 import cors from 'cors';
 
 export const setupApp = (app: Express) => {
-  // app.use(cookieParser());
-  // app.set('trust proxy', true);
 
   app.use(cors());
   app.use(express.json());
