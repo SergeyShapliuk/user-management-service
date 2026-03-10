@@ -14,14 +14,14 @@ const swaggerOptions = {
     },
   },
   apis: [
-    path.resolve('src/auth/docs/*.swagger.yml'),
-    path.resolve('src/users/docs/*.swagger.yml'),
-    path.resolve('src/testing/docs/*.swagger.yml'),
+    path.join(__dirname, "../../auth/docs/*.swagger.yml"),
+    path.join(__dirname, "../../users/docs/*.swagger.yml"),
+    path.join(__dirname, "../../testing/docs/*.swagger.yml"),
   ],
 };
 
 const swaggerSpec = swaggerJsdoc(swaggerOptions);
 
 export const setupSwagger = (app: Express) => {
-  app.use('/api/swagger', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+  app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 };

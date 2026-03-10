@@ -18,6 +18,8 @@ export const setupApp = (app: Express) => {
   app.use(cors());
   app.use(express.json());
 
+  setupSwagger(app);
+
   app.use(`${API_PREFIX}${USERS_PATH}`, usersRouter);
   app.use(`${API_PREFIX}${AUTH_PATH}`, authRouter);
   app.use(TESTING_PATH, testingRouter);
@@ -26,7 +28,6 @@ export const setupApp = (app: Express) => {
     res.status(HttpStatus.Ok).send('Test Effective Mobile');
   });
 
-  setupSwagger(app);
-
+  
   return app;
 };
